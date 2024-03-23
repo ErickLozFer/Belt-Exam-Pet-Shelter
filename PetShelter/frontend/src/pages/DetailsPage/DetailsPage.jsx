@@ -96,8 +96,8 @@ export const DetailsPage = () => {
                 </div>
 
                 <div className={styles.subContainer}>
-                    <ButtonComp onclick={handleLike} name={"❤️ Like"} color={"green"} />
-                    <span>Likes: {likes}</span>
+                    <ButtonComp onclick={handleLike} name={`❤️ Like ${pet.petName}`} color={"green"} className={styles.likeButton}/>
+                    <span className={styles.likesCount}>{likes} likes</span>
                 </div>
             </div>
         </div>

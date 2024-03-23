@@ -14,3 +14,15 @@
 .subContainer>h3 {
     padding-right: 32px;
 }
+
+.space {
+    margin-right: 10px;
+}
+
+.likeButton {
+    margin-right: 20px;
+}
+
+.likesCount {
+    margin-left: 10px;
+}
