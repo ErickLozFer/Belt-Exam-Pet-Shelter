@@ -1,8 +1,3 @@
-body {
-    margin: 0 auto;
-    padding: 0;
-}
-
 .tableContainer {
     border: 2px solid black;
 }
@@ -19,10 +14,12 @@ table tr:nth-child(odd) {
 th {
     background-color: #ffe2c9;
     border: 2px solid black;
+    width: 170px;
 }
 
 table {
     border-collapse: collapse;
+    margin-left: 50px;
 }
 
 table td {

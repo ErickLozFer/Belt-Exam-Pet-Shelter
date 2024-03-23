@@ -55,16 +55,9 @@ export const HomePage = () => {
                                 <td>{item.petName}</td>
                                 <td>{item.petType}</td>
                                 <td>
-                                    <a
-                                        className={styles.link}
-                                        onClick={() => goToDetails(item._id)}
-                                    >
-                                        Details
-                                    </a>
+                                    <a className={styles.link} onClick={() => goToDetails(item._id)}>Details</a>
                                     <label> | </label>
-                                    <a className={styles.link} onClick={() => goToEdit(item._id)}>
-                                        Edit
-                                    </a>
+                                    <a className={styles.link} onClick={() => goToEdit(item._id)}>Edit</a>
                                 </td>
                             </tr>
                         );

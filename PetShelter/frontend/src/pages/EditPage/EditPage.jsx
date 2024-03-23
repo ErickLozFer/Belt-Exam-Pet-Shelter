@@ -40,7 +40,10 @@ export const EditPage = () => {
             },
         };
         try {
-            let result = await axios.put("http://localhost:8080/api/pets/update/" + petId, data);
+            let result = await axios.put(
+                "http://localhost:8080/api/pets/update/" + petId,
+                data
+            );
             if (result.status === 200) {
                 navigate("/");
             }
@@ -66,10 +69,8 @@ export const EditPage = () => {
             ></HeaderComp>
 
             <div className={styles.formContainer}>
-
                 <form>
                     <label>Pet Name:</label>
-
 
                     <input
                         type="text"
@@ -82,12 +83,7 @@ export const EditPage = () => {
                         </p>
                     )}
 
-
-
-
-
                     <label>Pet Type:</label>
-
 
                     <input
                         type="text"
@@ -99,11 +95,6 @@ export const EditPage = () => {
                             Type must be at least 3 characters long...
                         </p>
                     )}
-
-
-
-
-
 
                     <label>Pet Description:</label>
                     <input
@@ -117,18 +108,11 @@ export const EditPage = () => {
                         </p>
                     )}
 
-
-
-
-
                     <ButtonComp
                         onclick={editPet}
                         name={"✏️ Edit Pet"}
                         color={"dodgerblue"}
                     ></ButtonComp>
-
-
-
                 </form>
 
                 <form>
