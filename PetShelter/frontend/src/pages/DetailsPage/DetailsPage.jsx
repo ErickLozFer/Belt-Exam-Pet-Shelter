@@ -1,5 +1,5 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import styles from "./DetailsPage.module.css";
 import { ButtonComp } from "../../components/ButtonComp/ButtonComp";
@@ -8,7 +8,6 @@ import { HeaderComp } from "../../components/HeaderComp/HeaderComp";
 export const DetailsPage = () => {
     const params = useParams();
     const petId = params.id;
-
     const navigate = useNavigate();
 
     const [pet, setPet] = useState({
@@ -22,12 +21,13 @@ export const DetailsPage = () => {
         },
     });
 
+    const [likes, setLikes] = useState(0);
+
     const getPetById = async () => {
         try {
-            let result = await axios.get(
-                "http://localhost:8080/api/pets/get/" + petId
-            );
+            let result = await axios.get("http://localhost:8080/api/pets/get/" + petId);
             setPet(result.data);
+            setLikes(result.data.likes); //Se obtiene el número de likes de la mascota
         } catch (error) {
             console.log(error);
         }
@@ -35,12 +35,20 @@ export const DetailsPage = () => {
 
     const adoptPet = async () => {
         try {
-            let result = await axios.delete(
-                "http://localhost:8080/api/pets/delete/" + petId
-            );
+            let result = await axios.delete("http://localhost:8080/api/pets/delete/" + petId);
             if (result.status === 200) navigate("/");
         } catch (error) {
             alert(error.response.data.message);
+        }
+    };
+
+    const handleLike = async () => {
+        try {
+            const updatedPet = { ...pet, likes: likes + 1 }; //Se incrementa el número de likes
+            await axios.put(`http://localhost:8080/api/pets/update/${petId}`, updatedPet);
+            setLikes(likes + 1); //Se actualiza el estado local de likes
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -79,12 +87,17 @@ export const DetailsPage = () => {
                 </div>
 
                 <div className={styles.subContainer}>
-                    <h3>Skills :</h3>
+                    <h3>Skills:</h3>
                     <label className={styles.skills}>
                         {pet.petSkills.skillOne} <br />
                         {pet.petSkills.skillTwo} <br />
                         {pet.petSkills.skillThree}
                     </label>
+                </div>
+
+                <div className={styles.subContainer}>
+                    <ButtonComp onclick={handleLike} name={"❤️ Like"} color={"green"} />
+                    <span>Likes: {likes}</span>
                 </div>
             </div>
         </div>

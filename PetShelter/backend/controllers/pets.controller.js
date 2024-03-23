@@ -70,4 +70,19 @@ const deletePet = async (req, res) => {
     }
 };
 
-export { createPet, getAllPets, getPetsById, updatePet, deletePet };
+//LIKES
+const updateLikes = async (req, res) => {
+    try {
+        const { petsId } = req.params;
+        const { likes } = req.body;
+        await Pets.findByIdAndUpdate(petsId, { likes });
+        res.status(200).json({ message: "Likes updated successfully." });
+    } catch (error) {
+        console.log("Error" + error.message);
+        res.status(400).json({
+            message: error.message,
+        });
+    }
+};
+
+export { createPet, getAllPets, getPetsById, updatePet, deletePet, updateLikes };

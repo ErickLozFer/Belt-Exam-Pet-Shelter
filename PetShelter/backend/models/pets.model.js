@@ -32,6 +32,10 @@ const PetsSchema = new mongoose.Schema(
                 required: false,
             },
         },
+        likes: {
+            type: Number,
+            default: 0, // Se inicializa el número de likes en 0
+        },
     },
     { timestamps: true }
 );
