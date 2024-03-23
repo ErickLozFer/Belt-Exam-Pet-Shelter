@@ -1,3 +1,8 @@
+body {
+    margin: 0 auto;
+    padding: 0;
+}
+
 .tableContainer {
     border: 2px solid black;
 }
@@ -8,11 +13,12 @@
 }
 
 table tr:nth-child(odd) {
-    background-color: beige;
+    background-color: #ffffca;
 }
 
 th {
-    background-color: antiquewhite;
+    background-color: #ffe2c9;
+    border: 2px solid black;
 }
 
 table {
