@@ -22,12 +22,13 @@ export const DetailsPage = () => {
     });
 
     const [likes, setLikes] = useState(0);
+    const [likeButtonDisabled, setLikeButtonDisabled] = useState(false);
 
     const getPetById = async () => {
         try {
             let result = await axios.get("http://localhost:8080/api/pets/get/" + petId);
             setPet(result.data);
-            setLikes(result.data.likes); //Se obtiene el número de likes de la mascota
+            setLikes(result.data.likes); // Se obtiene el número de likes de la mascota
         } catch (error) {
             console.log(error);
         }
@@ -44,9 +45,17 @@ export const DetailsPage = () => {
 
     const handleLike = async () => {
         try {
-            const updatedPet = { ...pet, likes: likes + 1 }; //Se incrementa el número de likes
+            // Desactivar el botón de like
+            setLikeButtonDisabled(true);
+
+            const updatedPet = { ...pet, likes: likes + 1 }; // Se incrementa el número de likes
             await axios.put(`http://localhost:8080/api/pets/update/${petId}`, updatedPet);
-            setLikes(likes + 1); //Se actualiza el estado local de likes
+            setLikes(likes + 1); // Se actualiza el estado local de likes
+
+            // Reactivar el botón de like después de un tiempo
+            setTimeout(() => {
+                setLikeButtonDisabled(false);
+            }, 60000); // 60000 milisegundos = 1 minuto
         } catch (error) {
             console.log(error);
         }
@@ -96,7 +105,13 @@ export const DetailsPage = () => {
                 </div>
 
                 <div className={styles.subContainer}>
-                    <ButtonComp onclick={handleLike} name={`❤️ Like ${pet.petName}`} color={"green"} className={styles.likeButton}/>
+                    <ButtonComp
+                        onclick={handleLike}
+                        name={`❤️ Like ${pet.petName}`}
+                        color={"green"}
+                        disabled={likeButtonDisabled}
+                        className={styles.likeButton}
+                    />
                     <span className={styles.likesCount}>{likes} likes</span>
                 </div>
             </div>
